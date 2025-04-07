@@ -32,6 +32,14 @@ dependencies {//의존성 - 스프링머시기에서 만든 web이나 db 등을 
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-validation
 	implementation("org.springframework.boot:spring-boot-starter-validation")
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security
+	implementation("org.springframework.boot:spring-boot-starter-security:3.4.4")
+	// https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-api
+	implementation("io.jsonwebtoken:jjwt-api:0.12.6")
+	// https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-jackson
+	runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.12.6")
+	// https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-impl
+	runtimeOnly("io.jsonwebtoken:jjwt-impl:0.12.6")
 }
 
 noArg{ //매개변수 없는 생성자를 자동으로 추가
