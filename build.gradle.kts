@@ -61,3 +61,4 @@ allOpen { //plugin.spring외에 추가로 열 기능?
 tasks.withType<Test> {
 	useJUnitPlatform()
 }
+//..
