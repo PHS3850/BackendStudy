@@ -1,0 +1,11 @@
+###
+POST localhost:8080/posting
+Content-Type: application/json
+
+{
+  "title": "Kotlin 게시글",
+  "text": "이건 DTO 연습 예시입니다."
+}
+
+
+###
