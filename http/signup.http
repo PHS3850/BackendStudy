@@ -1,0 +1,17 @@
+###
+GET localhost:8080/member
+Content-Type: application/json
+
+{
+  "id": "Jon_Nahar",
+  "password": "qwerqwer1234!@#$",
+  "email": "test@test.sugoring",
+  "dormtype": "GOA",
+  "name": "존 나하르"
+}
+
+
+###
+
+
+//어케하는지 여쭤보자,,,

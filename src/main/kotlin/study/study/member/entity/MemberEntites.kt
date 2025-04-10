@@ -3,6 +3,8 @@ package study.study.member.entity
 import jakarta.persistence.*
 //import study.study.common.status.Gender
 import study.study.common.status.DormType
+import study.study.common.status.ROLE
+
 //import java.time.LocalDate
 
 
@@ -36,12 +38,25 @@ class Member(
     val email: String,
 
 
+){
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
+    val memberRole: List<MemberRole>? = null
 
-    )
+}
 
-// {} 와 () 사용 - 매개변수와 함수 내 변수
+@Entity
+class MemberRole(
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    var id: Long? = null,
 
-// 공부해가자
+    @Column(nullable = false, length = 30)
+    @Enumerated(EnumType.STRING)
+    val role: ROLE,
 
-
-//..
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(foreignKey = ForeignKey(name = "fk_member_role_member_id"))
+    val member: Member,
+    ){
+}
+//스터디용 코드
