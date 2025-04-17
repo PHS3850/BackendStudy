@@ -24,11 +24,8 @@ class PostController (
         val userId = (SecurityContextHolder
             .getContext()
             .authentication
-
-
             .principal as CustomUser)
             .userId
-
 
         val resultMsg : String = postService.post(postDtoRequest, userId)
 
