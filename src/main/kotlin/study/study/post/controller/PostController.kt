@@ -1,14 +1,11 @@
 package study.study.post.controller
 
-import jakarta.persistence.Id
 import jakarta.validation.Valid
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.bind.annotation.*
 import study.study.common.dto.BaseResponse
 import study.study.common.dto.CustomUser
-import study.study.member.dto.MemberDtoRequest
 import study.study.post.dto.PostDtoRequest
-import study.study.post.entity.Post
 import study.study.post.service.PostService
 
 @RequestMapping("api/post")
