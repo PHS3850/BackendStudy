@@ -4,12 +4,9 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import jakarta.validation.constraints.Email
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Pattern
-import jakarta.validation.constraints.Size
 import study.study.common.annotation.ValidEnum
 import study.study.common.status.DormType
 import study.study.member.entity.Member
-//import java.time.LocalDate
-//import java.time.format.DateTimeFormatter
 
 
 data class MemberDtoRequest(
@@ -45,15 +42,15 @@ data class MemberDtoRequest(
 */
 
     @field:NotBlank
-    @field:ValidEnum(enumClass = DormType::class, message = "고운 A, B, C, 혹은 경상 11, 12, 13, 14중 하나를 선택해주세요")
-    @JsonProperty("dorm type")
-    private val _dormType: String?,
-
-    @field:NotBlank
     @field:Email
     @JsonProperty("email")
     private val _email: String?,
 
+
+    @field:NotBlank
+    @field:ValidEnum(enumClass = DormType::class, message = "고운 A, B, C, 혹은 경상 11, 12, 13, 14중 하나를 선택해주세요")
+    @JsonProperty("dormtype")
+    private val _dormType: String?,
 
 ) {
     val loginId: String
@@ -96,7 +93,6 @@ data class LoginDto(
 
 
 }
-
 data class MemberDtoResponse(
     val id: Long,
     val loginId: String,
@@ -104,4 +100,3 @@ data class MemberDtoResponse(
     val dormType: String,
     val email: String,
     )
-

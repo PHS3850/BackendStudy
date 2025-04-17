@@ -6,7 +6,6 @@ import study.study.member.entity.MemberRole
 
 interface MemberRepository : JpaRepository<Member, Long> {
     fun findByLoginId(loginId: String): Member?
-    //id중복검사?
 
 }
 

@@ -26,13 +26,17 @@ class PostService (
 
 
         val member = memberRepository.findByIdOrNull(userId) ?: throw InvalidinputException("id", "회원번호(${id})가 존재하지 않는 유저입니다.")
-        println("멤버 체크, null이면 throw 문장")
+      //  println("멤버 체크, null이면 throw 문장")
+
         member.name
-        println("멤버.이름 넣는건가?")
+        //println("멤버.이름 넣는건가?")
+
         val post = postDtoRequest.toEntity(member.name)
-        println("포스트dto리퀘스트에 담아서 투엔티티로")
+        //println("?")
+
         postRepository.save(post)
-        println("레포지토리에 저장?")
+        //println("레포지토리에 저장?")
+
         return "게시글을 작성했습니다."
     }
 }

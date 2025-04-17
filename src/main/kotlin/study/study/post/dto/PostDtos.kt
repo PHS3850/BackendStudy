@@ -48,3 +48,7 @@ data class PostDtoRequest(
  *  Post(null,title,text,writer,createDate)
  *
  */
+
+//게시글에도 id가 있다?
+//내정보 조회랑 비슷하게 하기?
+

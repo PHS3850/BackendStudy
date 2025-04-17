@@ -17,6 +17,7 @@ import study.study.member.entity.MemberRole
 import study.study.member.repository.MemberRepository
 import study.study.member.repository.MemberRoleRepository
 
+
 @Transactional
 @Service
 class MemberService(
@@ -24,26 +25,27 @@ class MemberService(
     private val memberRoleRepository: MemberRoleRepository,
     private val authenticationManagerBuilder: AuthenticationManagerBuilder,
     private val jwtTokenProvider: JwtTokenProvider
-
 ) {
     /**
       회원가입
      */
     fun signUp(memberDtoRequest: MemberDtoRequest): String{
     //id 중복 검사
+        println("signUp")
         var member: Member? = memberRepository.findByLoginId(memberDtoRequest.loginId)
         if(member != null){
             throw InvalidinputException("loginId","이미 등록된 ID 입니다")
-
         }
-
+        println("member check")
 
         member = memberDtoRequest.toEntity()
         memberRepository.save(member)
+        println("***************1")
 
-
-        val memberRole: MemberRole = MemberRole(null, ROLE.MEMBER, member )
+        val memberRole = MemberRole(null, ROLE.MEMBER, member )
         memberRoleRepository.save(memberRole)
+        println("***************2")
+
         //>?
 
         return "회원가입이 완료되었습니다."
@@ -62,7 +64,7 @@ class MemberService(
     /**
      * 내 정보 조회
      */
-    fun  searchMyInfo(id: Long): MemberDtoResponse{
+    fun  searchMyInfo(id: Long): MemberDtoResponse {
         val member :Member = memberRepository.findByIdOrNull(id) ?: throw InvalidinputException("id","회원번호(${id})가 존재하지 않는 유저입니다.")
         return member.toDto()
     }

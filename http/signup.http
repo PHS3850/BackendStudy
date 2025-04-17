@@ -3,13 +3,13 @@ POST localhost:8080/api/member/signup
 Content-Type: application/json
 
 {
-  "id": "pospos",
+
+  "loginId": "hellold",
   "password": "QWERqwerqwer1234!@#$",
-  "email": "test@test.sog",
-  "dormType": "GOA",
-  "name": "POPOS"
+  "name": "POPOS",
+  "email": "test@test.aaa",
+  "dormtype": "GOA"
 }
 
 
 ###
-

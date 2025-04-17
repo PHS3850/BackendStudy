@@ -23,11 +23,15 @@ class PostController (
             .authentication
             .principal as CustomUser)
             .userId
-        println("post 함수 설정")
+        //println("post 함수 설정")
         val resultMsg : String = postService.post(postDtoRequest, userId)
-        println("포스트서비스로?")
+        //println("포스트서비스로?")
         return BaseResponse(resultMsg)
 
     }
 
 }
+
+/**
+ * 리스트? 전체 리스트 꺼내고 > 특정 리스트 꺼내기
+ */
