@@ -1,5 +1,5 @@
 ###
-POST localhost:8080/posting
+POST localhost:8080/api/post/
 Content-Type: application/json
 
 {
@@ -9,3 +9,5 @@ Content-Type: application/json
 
 
 ###
+
+

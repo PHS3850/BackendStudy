@@ -13,7 +13,7 @@ import study.study.member.entity.Member
 
 
 data class MemberDtoRequest(
-    val id: Long?,
+    var id: Long,
 
 
     @field:NotBlank
@@ -96,3 +96,12 @@ data class LoginDto(
 
 
 }
+
+data class MemberDtoResponse(
+    val id: Long,
+    val loginId: String,
+    val name: String,
+    val dormType: String,
+    val email: String,
+    )
+

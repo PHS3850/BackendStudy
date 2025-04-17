@@ -4,6 +4,7 @@ import jakarta.persistence.*
 //import study.study.common.status.Gender
 import study.study.common.status.DormType
 import study.study.common.status.ROLE
+import study.study.member.dto.MemberDtoResponse
 
 //import java.time.LocalDate
 
@@ -25,7 +26,7 @@ class Member(
 
     @Column(nullable = false, length = 10)
     val name: String,
-/*
+/**
     @Column(nullable = false)
     @Temporal(TemporalType.DATE)
     val birthDate: LocalDate,
@@ -42,6 +43,8 @@ class Member(
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
     val memberRole: List<MemberRole>? = null
 
+    fun toDto(): MemberDtoResponse =
+        MemberDtoResponse(id!!, loginId, name, dormType.desc, email)
 }
 
 @Entity
@@ -60,3 +63,5 @@ class MemberRole(
     ){
 }
 //스터디용 코드
+
+

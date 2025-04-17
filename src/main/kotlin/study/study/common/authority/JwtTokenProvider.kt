@@ -11,6 +11,7 @@ import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.User
 import org.springframework.security.core.userdetails.UserDetails
+import study.study.common.dto.CustomUser
 import java.util.*
 
 
@@ -25,6 +26,9 @@ class JwtTokenProvider {
 
     private val key by lazy { Keys.hmacShaKeyFor(Decoders.BASE64.decode(secretKey)) }
 
+    /**
+     * 토큰 생성
+     */
     fun createToken(authentication: Authentication): TokenInfo {
         val authority: String = authentication
             .authorities
@@ -39,6 +43,7 @@ class JwtTokenProvider {
             .builder()
             .subject(authentication.name)
             .claim("auth", authentication)
+            .claim("userId",authentication.principal as CustomUser)
             .issuedAt(now)
             .expiration(accessExpiration)
             .signWith(key, Jwts.SIG.HS256)
@@ -47,7 +52,7 @@ class JwtTokenProvider {
         return TokenInfo("Bearer",accessToken)
     }
 
-    /*
+    /**
      *  토큰 정보 추출
      */
 
@@ -56,21 +61,21 @@ class JwtTokenProvider {
         val claims : Claims = getClaims(token)
 
         val auth = claims["auth"] ?: throw RuntimeException("잘못된 토큰입니다.")
-
+        val userId = claims["userId"] ?: throw RuntimeException("잘못된 토큰 입니다.")
 
         //권한 정보 추출
         val authorities: Collection<GrantedAuthority> = (auth as String)
             .split(",")
             .map{SimpleGrantedAuthority(it)}
 
-        val principal: UserDetails = User(claims.subject,"",authorities)
+        val principal: UserDetails = CustomUser(userId.toString().toLong(),claims.subject,"",authorities)
 
         return UsernamePasswordAuthenticationToken(principal,"",authorities)
 
 
     }
 
-    /*
+    /**
      * Token 검증?
      */
     fun validateToken(token: String): Boolean {
@@ -96,8 +101,7 @@ class JwtTokenProvider {
 
         return false
     }
-
-
+//이걸 써야하는데...
 
 
     private fun getClaims(token: String): Claims =
@@ -112,9 +116,3 @@ class JwtTokenProvider {
 
 
 }
-
-/*
-다담주강의끗남
-강의에업는거만들거임
-중.고.끝나면프로젝트시작.
-*/
