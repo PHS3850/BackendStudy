@@ -1,13 +1,15 @@
 package study.study.post.dto
 
+import com.fasterxml.jackson.annotation.JsonFormat
 import com.fasterxml.jackson.annotation.JsonProperty
 import jakarta.validation.constraints.NotBlank
 import study.study.post.entity.Post
+import study.study.post.entity.PostList
 import java.time.LocalDateTime
 
 data class PostDtoRequest(
 
-    val id : Long?,
+    val id : Long? = null,
 
     @field:NotBlank
     @JsonProperty("title")
@@ -21,34 +23,17 @@ data class PostDtoRequest(
     private val createDate: LocalDateTime = LocalDateTime.now()
 
 
-    // 작성자 추가 완료 4.10
 ){
     val title: String
-        get() = _title!!
+        get() = _title!!.toString()
     val text: String
-        get() = _text!!
+        get() = _text!!.toString()
 
-    fun toEntity(writer: String) : Post = Post(
-        null,title,text,writer,createDate
-    )
+    fun toEntity(writer: String) : Post {
+        return Post(
+            null, title, text, writer, createDate
+        )
+    }
 }
 
-
-
-/**
- * int add(int a, int b){
- *     return a+b;
- * }
- *
- * int main(){
- *     add(2,3);
- * }
- *
- *
- *  Post(null,title,text,writer,createDate)
- *
- */
-
-//게시글에도 id가 있다?
-//내정보 조회랑 비슷하게 하기?
-
+//리스트 받고 내용 받는걸 하나 더 만들어야하나?

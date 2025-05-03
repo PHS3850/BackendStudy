@@ -1,6 +1,8 @@
 package study.study.post.entity
 
 import jakarta.persistence.*
+
+import java.time.LocalDate
 import java.time.LocalDateTime
 
 
@@ -8,7 +10,7 @@ import java.time.LocalDateTime
 class Post(
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null,
 
     @Column(nullable = false, length = 25)
@@ -28,7 +30,4 @@ class Post(
     //작성 날짜 추가?
 
 
-){
-
-}
-// 4.10 작성자 항목 추가
+){}

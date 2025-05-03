@@ -31,20 +31,16 @@ class MemberService(
      */
     fun signUp(memberDtoRequest: MemberDtoRequest): String{
     //id 중복 검사
-        println("signUp")
         var member: Member? = memberRepository.findByLoginId(memberDtoRequest.loginId)
         if(member != null){
             throw InvalidinputException("loginId","이미 등록된 ID 입니다")
         }
-        println("member check")
 
         member = memberDtoRequest.toEntity()
         memberRepository.save(member)
-        println("***************1")
 
         val memberRole = MemberRole(null, ROLE.MEMBER, member )
         memberRoleRepository.save(memberRole)
-        println("***************2")
 
         //>?
 
@@ -80,4 +76,12 @@ class MemberService(
         return "수정 완료되었습니다."
 
     }
+
+    //전체 게시글 가져오기
+    /**
+     * fun allGetMem List<>어쩌구
+     * return 리스트
+     *
+     * 이제 컨트롤러로 가서 저쩌구
+     */
 }

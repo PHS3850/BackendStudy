@@ -8,6 +8,7 @@ import study.study.common.exception.InvalidinputException
 import study.study.member.repository.MemberRepository
 
 import study.study.post.dto.PostDtoRequest
+import study.study.post.entity.Post
 import study.study.post.repository.PostRepository
 
 @Transactional
@@ -23,20 +24,21 @@ class PostService (
         postDtoRequest: PostDtoRequest,
         userId: Long,
     ): String {
-
-
-        val member = memberRepository.findByIdOrNull(userId) ?: throw InvalidinputException("id", "회원번호(${id})가 존재하지 않는 유저입니다.")
-      //  println("멤버 체크, null이면 throw 문장")
-
-        member.name
-        //println("멤버.이름 넣는건가?")
+        val member =
+            memberRepository.findByIdOrNull(userId) ?: throw InvalidinputException("id", "회원번호(${id})가 존재하지 않는 유저입니다.")
 
         val post = postDtoRequest.toEntity(member.name)
-        //println("?")
-
         postRepository.save(post)
-        //println("레포지토리에 저장?")
-
         return "게시글을 작성했습니다."
+    }
+
+    fun showPostList(): MutableList<Post> {
+        return postRepository.findAll()
+    }
+
+    fun getPost(postId: Long) : Post {
+        val post = postRepository.findPostById(postId)
+            ?: throw InvalidinputException("게시글 번호 : $postId 존재하지 않는 게시글 입니다.")
+        return post
     }
 }

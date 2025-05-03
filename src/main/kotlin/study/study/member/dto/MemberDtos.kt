@@ -100,3 +100,5 @@ data class MemberDtoResponse(
     val dormType: String,
     val email: String,
     )
+
+
