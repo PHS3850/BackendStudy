@@ -35,7 +35,7 @@ class PostService (
     fun showPostList(): MutableList<Post> {
         return postRepository.findAll()
     }
- // 외않덴대
+ // 외않댐
     fun getPost(postId: Long) : Post {
         val post = postRepository.findPostById(postId)
             ?: throw InvalidinputException("게시글 번호 : $postId 존재하지 않는 게시글 입니다.")
