@@ -3,20 +3,13 @@ POST localhost:8080/api/member/signup
 Content-Type: application/json
 
 {
-  "loginId" : "n",
-  "password" : "qwer1234!",
-  "name" : "name",
-  "email": "d@d.c",
-  "dormType": "GOA"
+
+  "loginId": "hellold",
+  "password": "QWERqwerqwer1234!@#$",
+  "name": "POPOS",
+  "email": "test@test.aaa",
+  "dormtype": "GOA"
 }
 
 
 ###
-
-
-POST localhost:8080/api/member/login
-
-{
-  "loginId" : "n",
-  "password" : "qwer1234!"
-}
