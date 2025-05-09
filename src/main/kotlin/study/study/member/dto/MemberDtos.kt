@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import jakarta.validation.constraints.Email
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Pattern
+import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder
 import study.study.common.annotation.ValidEnum
 import study.study.common.status.DormType
 import study.study.member.entity.Member
@@ -31,16 +32,6 @@ data class MemberDtoRequest(
     @JsonProperty("name")
     private val _name: String?,
 
-/*
-    @field:NotBlank
-    @field:Pattern(
-        regexp = "^([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))$",
-        message = "날짜형식(YYYY-MM-DD)을 확인해주세요"
-    )
-    @JsonProperty("birthDate")
-    private val _birthDate: String?,
-*/
-
     @field:NotBlank
     @field:Email
     @JsonProperty("email")
@@ -48,34 +39,29 @@ data class MemberDtoRequest(
 
 
     @field:NotBlank
-    @field:ValidEnum(enumClass = DormType::class, message = "고운 A, B, C, 혹은 경상 11, 12, 13, 14중 하나를 선택해주세요")
-    @JsonProperty("dormtype")
+    @field:ValidEnum(enumClass = DormType::class,
+        message = "고운 A, B, C, 혹은 경상 11, 12, 13, 14중 하나를 선택해주세요")
+    @JsonProperty("dormType")
     private val _dormType: String?,
 
 ) {
+    private val encoder = SCryptPasswordEncoder(16,8,1,8,8)
+
     val loginId: String
         get() = _loginId!!
-    val password: String
-        get() = _password!!
-    val name: String
+    private val password: String
+        get() = encoder.encode(_password)
+    private val name: String
         get() = _name!!
-/*    val birthDate: LocalDate
-        get() = _birthDate!!.toLocalDate()  */
-    val dormType: DormType
-        get() = DormType.valueOf(_dormType!!)
-    val email: String
+    private val email: String
         get() = _email!!
-    //private fun String.toLocalDate(): LocalDate =
-    //LocalDate.parse(this, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+    private val dormType: DormType
+        get() = DormType.valueOf(_dormType!!)
+
 
     fun toEntity() : Member = //멤버 생성자를 사용해 엔티티 반환
-        Member(id, loginId, password, name, dormType, email)
+        Member(id, loginId, password, name, email, dormType)
 }
-
-
-//DormType 추가완료,,,
-//BirthDate 삭제완료,,,
-
 
 data class LoginDto(
     @field:NotBlank
@@ -99,6 +85,7 @@ data class MemberDtoResponse(
     val name: String,
     val dormType: String,
     val email: String,
-    )
+    ) {
+}
 
 

@@ -19,15 +19,15 @@ class SecurityConfig(
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
         http
             .httpBasic { it.disable() }
-            .csrf{ it.disable() }
-            .sessionManagement{it.sessionCreationPolicy(SessionCreationPolicy.STATELESS)}
+            .csrf() { it.disable() }
+            .sessionManagement{
+                it.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            }
             .authorizeHttpRequests {
                 it.requestMatchers("/api/member/signup", "/api/member/login").anonymous()
-                it.requestMatchers("/api/member/**").hasRole("MEMBER")
-
-                it.requestMatchers("/api/post/**").hasRole("MEMBER") // post에서도 토큰 검증??
-
-                    .anyRequest().permitAll()
+                  .requestMatchers("/api/member/**").hasRole("MEMBER")
+                  .requestMatchers("/api/post/**").hasRole("MEMBER") // post에서도 토큰 검증??
+                  .anyRequest().permitAll()
             }
             .addFilterBefore(
                 JwtAuthenticationFilter(jwtTokenProvider),
@@ -41,7 +41,3 @@ class SecurityConfig(
     fun passwordEncoder(): PasswordEncoder =
         PasswordEncoderFactories.createDelegatingPasswordEncoder()
 }
-
-//뭗미;;;
-
-//...
