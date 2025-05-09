@@ -26,12 +26,14 @@ class Member(
     @Column(nullable = false, length = 10)
     val name: String,
 
+    @Column(nullable = false, length = 30)
+    val email: String,
+
     @Column(nullable = false, length = 5)
     @Enumerated(EnumType.STRING)
     val dormType: DormType,
 
-    @Column(nullable = false, length = 30)
-    val email: String,
+
 
 
 ){
@@ -39,7 +41,7 @@ class Member(
     val memberRole: List<MemberRole>? = null
 
     fun toDto(): MemberDtoResponse =
-        MemberDtoResponse(id!!, loginId, name, dormType.desc, email)
+        MemberDtoResponse(id!!, loginId, name, email, dormType.desc)
 }
 
 @Entity

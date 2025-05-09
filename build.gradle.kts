@@ -40,6 +40,7 @@ dependencies {//의존성 - 스프링머시기에서 만든 web이나 db 등을 
 	runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.12.6")
 	// https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-impl
 	runtimeOnly("io.jsonwebtoken:jjwt-impl:0.12.6")
+	implementation("org.bouncycastle:bcprov-jdk15on:1.70")
 }
 
 noArg{ //매개변수 없는 생성자를 자동으로 추가
