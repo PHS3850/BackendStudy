@@ -4,7 +4,6 @@ import jakarta.transaction.Transactional
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
-import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder
 import org.springframework.stereotype.Service
 import study.study.common.authority.JwtTokenProvider
 import study.study.common.authority.TokenInfo
@@ -31,30 +30,31 @@ class MemberService(
       회원가입
      */
     fun signUp(memberDtoRequest: MemberDtoRequest): String{
+    //id 중복 검사
         var member: Member? = memberRepository.findByLoginId(memberDtoRequest.loginId)
         if(member != null){
             throw InvalidinputException("loginId","이미 등록된 ID 입니다")
         }
+
         member = memberDtoRequest.toEntity()
         memberRepository.save(member)
+
         val memberRole = MemberRole(null, ROLE.MEMBER, member )
         memberRoleRepository.save(memberRole)
+
+        //>?
+
         return "회원가입이 완료되었습니다."
 
     }
 
-    /**
-     * 로그인
-     */
     fun login(loginDto: LoginDto): TokenInfo {
-        val member = memberRepository.findByLoginId(loginDto.loginId) ?: throw InvalidinputException("로그인 아이디 혹은 비밀번호가 틀렸습니다.")
-        val encoder = SCryptPasswordEncoder(16,8,1,8,8)
-        if(!encoder.matches(loginDto.password, member.password)){
-            throw InvalidinputException("로그인 아이디 혹은 비밀번호가 틀렸습니다.")
-        }
-        val authenticationToken = UsernamePasswordAuthenticationToken(loginDto.loginId, member.password)
-        val authentication = authenticationManagerBuilder.`object`.authenticate(authenticationToken)
-        return jwtTokenProvider.createToken(authentication)
+        val authenticationToken = UsernamePasswordAuthenticationToken(loginDto.loginId, loginDto.password)
+        val authorities = authenticationManagerBuilder.`object`.authenticate(authenticationToken)
+
+        return jwtTokenProvider.createToken(authenticationToken)
+
+
     }
 
     /**
@@ -75,12 +75,6 @@ class MemberService(
         memberRepository.save(member)
         return "수정 완료되었습니다."
 
-    }
-
-    fun dormInfo(id: Long): List<MemberDtoResponse> {
-        val dormType = memberRepository.findByIdOrNull(id)!!.dormType
-        val result = memberRepository.findAllByDormType(dormType)
-        return result.map { it.toDto() }
     }
 
     //전체 게시글 가져오기

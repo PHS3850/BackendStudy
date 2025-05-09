@@ -8,6 +8,7 @@ import study.study.common.dto.CustomUser
 import study.study.post.dto.PostDtoRequest
 import study.study.post.entity.Post
 import study.study.post.service.PostService
+import study.study.post.service.
 
 @RequestMapping("api/post")
 @RestController
@@ -33,7 +34,7 @@ class PostController (
     @GetMapping("/")
     fun getPostList() : BaseResponse<MutableList<Post>> {
 
-        val list = postService.showPostList()
+        val list = PostService.showPostList()
         return BaseResponse(data = list)
     }
 

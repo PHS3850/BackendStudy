@@ -25,7 +25,8 @@ class CustomExceptionHandler {
 
 
         }
-
+        //Dto에 추가한 Validation에서 에러가 발생하면... 메소드아규멘트낫밸리드익셉션을 떨굼 -> 에러들을 다 가져와서 필드네임, 에러메세지를 errors라는 뮤터블 램?에 담아놓는다
+        //데이터 위치에 넣고 반환 ?
 
         return ResponseEntity(BaseResponse(ResultCode.ERROR.name, errors, ResultCode.ERROR.msg), HttpStatus.BAD_REQUEST)
     }
