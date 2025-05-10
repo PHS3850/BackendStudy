@@ -1,13 +1,13 @@
 package study.study.common.status
 
 enum class DormType(val desc: String) {
-    GOA( "고운A"),
-    GOB( "고운B"),
-    GOC( "고운C"),
-    GS11( "경상11"),
-    GS12( "경상12"),
-    GS13( "경상13"),
-    GS14( "경상14"),
+    GounA( "고운A"),
+    GounB( "고운B"),
+    GounC( "고운C"),
+    Gyung11( "경상11"),
+    Gyung12( "경상12"),
+    Gyung13( "경상13"),
+    Gyung14( "경상14"),
 }
 
 enum class ResultCode(val msg: String) {

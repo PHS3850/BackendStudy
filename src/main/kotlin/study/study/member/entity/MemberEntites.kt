@@ -26,7 +26,7 @@ class Member(
     @Column(nullable = false, length = 10)
     val name: String,
 
-    @Column(nullable = false, length = 5)
+    @Column(nullable = false, length = 10)
     @Enumerated(EnumType.STRING)
     val dormType: DormType,
 

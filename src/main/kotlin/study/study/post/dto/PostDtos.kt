@@ -1,10 +1,8 @@
 package study.study.post.dto
 
-import com.fasterxml.jackson.annotation.JsonFormat
 import com.fasterxml.jackson.annotation.JsonProperty
 import jakarta.validation.constraints.NotBlank
 import study.study.post.entity.Post
-import study.study.post.entity.PostList
 import java.time.LocalDateTime
 
 data class PostDtoRequest(

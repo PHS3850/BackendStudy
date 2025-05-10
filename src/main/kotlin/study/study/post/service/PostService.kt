@@ -31,8 +31,13 @@ class PostService (
         postRepository.save(post)
         return "게시글을 작성했습니다."
     }
-
-    fun showPostList(): MutableList<Post> {
+    /**
+     * 특정 게시판 가져오기
+     */
+    /**
+     * 전체 게시글 가져오기
+     */
+    fun allGetPosts() : MutableList<Post> {
         return postRepository.findAll()
     }
  // 외않댐
@@ -41,4 +46,6 @@ class PostService (
             ?: throw InvalidinputException("게시글 번호 : $postId 존재하지 않는 게시글 입니다.")
         return post
     }
+
+
 }

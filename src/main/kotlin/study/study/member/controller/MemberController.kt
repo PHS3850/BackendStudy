@@ -37,7 +37,6 @@ class MemberController (
      */
     @PostMapping("/login")
     fun login(@RequestBody @Valid loginDto: LoginDto): BaseResponse<TokenInfo> {
-
         val tokenInfo = memberService.login(loginDto)
         return BaseResponse(data = tokenInfo)
     }
@@ -65,6 +64,14 @@ class MemberController (
         val resultMsg : String = memberService.saveMyInfo(memberDtoRequest)
         return BaseResponse(message = resultMsg)
     }
-
+    /**
+     * 같은 기숙사 타입 리스트
+     */
+    @GetMapping("/dorm/info")
+    fun dormInfo(): BaseResponse<List<MemberDtoResponse>> {
+        val userId = (SecurityContextHolder.getContext().authentication.principal as CustomUser).userId
+        val result = memberService.dormInfo(userId)
+        return BaseResponse(data = result)
+    }
 }
 

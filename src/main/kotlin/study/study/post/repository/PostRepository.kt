@@ -8,3 +8,8 @@ interface PostRepository : JpaRepository<Post, Long>{
     fun findPostById(postId: Long): Post?
 
 }
+/**
+ * interface BoardRepository : JpaRepository<Board, Long>{
+ *     fun findBoardById(boardId: Long): Board?
+ * }
+ */

@@ -8,7 +8,6 @@ import study.study.common.dto.CustomUser
 import study.study.post.dto.PostDtoRequest
 import study.study.post.entity.Post
 import study.study.post.service.PostService
-import study.study.post.service.
 
 @RequestMapping("api/post")
 @RestController
@@ -31,13 +30,18 @@ class PostController (
         return BaseResponse(resultMsg)
 
     }
+    /**
+     * 전체 게시글 가져오기
+     */
     @GetMapping("/")
-    fun getPostList() : BaseResponse<MutableList<Post>> {
-
-        val list = PostService.showPostList()
+    fun allGetPosts() : BaseResponse<MutableList<Post>> {
+        val list = postService.allGetPosts()
         return BaseResponse(data = list)
     }
 
+    /**
+     * 특정 게시판 가져오기
+     */
 
     @GetMapping("/{id}")
     fun getPosts(@PathVariable id : Long) : BaseResponse<Post> {
@@ -46,7 +50,3 @@ class PostController (
     }
 
 }
-
-/**
- * 리스트? 전체 리스트 꺼내고 > 특정 리스트 꺼내기?
- */
