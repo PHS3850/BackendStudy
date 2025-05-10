@@ -6,10 +6,7 @@ import study.study.post.entity.Post
 
 interface PostRepository : JpaRepository<Post, Long>{
     fun findPostById(postId: Long): Post?
-
+//   fun findPostAtTitleWriter(title: String, writer: String): Post?
 }
-/**
- * interface BoardRepository : JpaRepository<Board, Long>{
- *     fun findBoardById(boardId: Long): Board?
- * }
- */
+//게시글을 가져올 때 제목이랑 작성자, 작성날짜만 보이게 하고싶으면
+//findAll이 아니라 특정 항목만 해서 가져오면 될거같다

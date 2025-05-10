@@ -2,7 +2,6 @@ package study.study.member.repository
 
 import org.springframework.data.jpa.repository.JpaRepository
 import study.study.common.status.DormType
-import study.study.member.dto.MemberDtoResponse
 import study.study.member.entity.Member
 import study.study.member.entity.MemberRole
 

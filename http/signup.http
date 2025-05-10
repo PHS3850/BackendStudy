@@ -1,4 +1,5 @@
 ###
+
 POST localhost:8080/api/member/signup
 Content-Type: application/json
 
@@ -10,9 +11,9 @@ Content-Type: application/json
   "dormType": "GounA"
 }
 
-
 ###
 POST localhost:8080/api/member/login
+Content-Type: application/json
 
 {
   "loginId" : "n",

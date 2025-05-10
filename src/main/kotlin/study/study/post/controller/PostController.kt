@@ -18,35 +18,25 @@ class PostController (
      * 게시글 작성 - 토큰 검증
      */
     @PostMapping("/")
-    fun post(@RequestBody @Valid postDtoRequest: PostDtoRequest): BaseResponse<String> {
-        val userId = (SecurityContextHolder
-            .getContext()
-            .authentication
-            .principal as CustomUser)
-            .userId
-        //println("post 함수 설정")
-        val resultMsg = postService.post(postDtoRequest, userId)
-        //println("포스트서비스로?")
+    fun posting(@RequestBody @Valid postDtoRequest: PostDtoRequest): BaseResponse<String> {
+        val userId = (SecurityContextHolder.getContext().authentication.principal as CustomUser).userId
+        val resultMsg = postService.posting(postDtoRequest, userId)
         return BaseResponse(resultMsg)
-
     }
     /**
      * 전체 게시글 가져오기
      */
     @GetMapping("/")
-    fun allGetPosts() : BaseResponse<MutableList<Post>> {
-        val list = postService.allGetPosts()
+    fun getAllPosts() : BaseResponse<MutableList<Post>> {
+        val list = postService.getAllPosts()
         return BaseResponse(data = list)
     }
-
     /**
      * 특정 게시판 가져오기
      */
-
     @GetMapping("/{id}")
-    fun getPosts(@PathVariable id : Long) : BaseResponse<Post> {
+    fun getPost(@PathVariable id : Long) : BaseResponse<Post> {
         val result = postService.getPost(id)
         return BaseResponse(data = result)
     }
-
 }

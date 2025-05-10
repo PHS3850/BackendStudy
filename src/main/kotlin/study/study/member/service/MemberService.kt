@@ -32,7 +32,7 @@ class MemberService(
     fun signUp(memberDtoRequest: MemberDtoRequest): String {
         var member: Member? = memberRepository.findByLoginId(memberDtoRequest.loginId)
         if(member != null)
-            return "이미 등록된 ID입니다."
+            return "이미 등록된 ID 입니다."
 
         member = memberDtoRequest.toEntity()
         memberRepository.save(member)

@@ -20,27 +20,24 @@ class PostService (
     /**
      * 게시글 작성
      */
-    fun post(
-        postDtoRequest: PostDtoRequest,
-        userId: Long,
-    ): String {
-        val member =
-            memberRepository.findByIdOrNull(userId) ?: throw InvalidinputException("id", "회원번호(${id})가 존재하지 않는 유저입니다.")
+    fun posting(
+        postDtoRequest: PostDtoRequest, userId: Long, ): String {
+        val member = memberRepository.findByIdOrNull(userId)
+            ?: throw InvalidinputException("id", "회원번호(${id})가 존재하지 않는 유저입니다.")
 
         val post = postDtoRequest.toEntity(member.name)
         postRepository.save(post)
         return "게시글을 작성했습니다."
     }
     /**
-     * 특정 게시판 가져오기
-     */
-    /**
      * 전체 게시글 가져오기
      */
-    fun allGetPosts() : MutableList<Post> {
+    fun getAllPosts() : MutableList<Post> {
         return postRepository.findAll()
     }
- // 외않댐
+    /**
+     * 특정 게시글 가져오기
+     */
     fun getPost(postId: Long) : Post {
         val post = postRepository.findPostById(postId)
             ?: throw InvalidinputException("게시글 번호 : $postId 존재하지 않는 게시글 입니다.")

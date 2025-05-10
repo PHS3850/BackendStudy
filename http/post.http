@@ -1,10 +1,10 @@
 ###
-POST localhost:8080/api/post/
+POST localhost:8080/api/post
 Content-Type: application/json
 
 {
   "title": "Kotlin 게시글",
-  "text": "이건 DTO 연습 예시입니다."
+  "content": "이건 DTO 연습 예시입니다."
 }
 
 

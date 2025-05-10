@@ -46,7 +46,7 @@ class Member(
 class MemberRole(
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    var id: Long? = null,
+    var     id: Long? = null,
 
     @Column(nullable = false, length = 30)
     @Enumerated(EnumType.STRING)
