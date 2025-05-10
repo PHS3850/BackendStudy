@@ -30,6 +30,9 @@ class PostService (
         return "게시글을 작성했습니다."
     }
     /**
+     *게시글작성이안되잖아
+     */
+    /**
      * 전체 게시글 가져오기
      */
     fun getAllPosts() : MutableList<Post> {

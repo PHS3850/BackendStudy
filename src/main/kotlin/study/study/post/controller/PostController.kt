@@ -24,6 +24,9 @@ class PostController (
         return BaseResponse(resultMsg)
     }
     /**
+     * 뭐가문제인데
+     */
+    /**
      * 전체 게시글 가져오기
      */
     @GetMapping("/")
